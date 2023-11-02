@@ -32,7 +32,8 @@ const registrar = async (req, res) => {
       personalGuardar.save();
       return res.status(200).send({
         status: "ok",
-        mensaje: "Insertado con exito",
+        mensaje: "Usuario agregado correctamente",
+        Titulo: "Felicitaciones",
       });
     }
   } catch (error) {
@@ -142,7 +143,7 @@ const login = async (req, res) => {
 
   //resultado final del método
   return res.status(200).send({
-    resultado: "success",
+    resultado: "ok",
     mensaje: " Ingreso exitoso !",
     user: {
       id: consulta._id,

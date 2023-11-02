@@ -1,8 +1,9 @@
 import React, { Component, useState } from "react";
 import HelperForm from "../../helpers/HelperForm";
 import { Global } from "../../helpers/Global";
-/* import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content"; */
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
 const Registrarse = () => {
   const { form, cambiar } = HelperForm({});
@@ -11,7 +12,7 @@ const Registrarse = () => {
     e.preventDefault();
     let nuevoPersona = form;
     //guardar en la api
-    const request = await fetch(Global.url + "personales/registrar", {
+    const request = await fetch(Global.url + "/personales/registrar", {
       method: "POST",
       body: JSON.stringify(nuevoPersona),
       headers: {
@@ -19,12 +20,24 @@ const Registrarse = () => {
       },
     });
     const data = await request.json();
+
     if (data.status == "ok") {
-      // console.log(data);
-      setGuardado("Guardado");
+      let titulo = data.titulo;
+      let mensaje = data.mensaje;
+      MySwal.fire({
+        title: <strong> {titulo}</strong>,
+        html: <i>{mensaje}</i>,
+        icon: "success",
+      });
     } else {
-      //  console.log(data);
-      setGuardado("Error");
+      let titulo = data.Encabezado;
+      let mensaje = data.mensaje;
+      MySwal.fire({
+        title: <strong> {titulo}</strong>,
+        html: <i>{mensaje}</i>,
+        icon: "error",
+      });
+      // console.log(data);
     }
   };
 
@@ -58,7 +71,7 @@ const Registrarse = () => {
               <input
                 className="input100"
                 type="text"
-                name="apellido"
+                name="apellidos"
                 onChange={cambiar}
               />
               <span className="focus-input100" data-symbol="&#xf206;"></span>

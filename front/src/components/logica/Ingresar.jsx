@@ -10,7 +10,7 @@ const Ingresar = () => {
     e.preventDefault();
     let usuarioLogin = form;
     //guardar en la api
-    const request = await fetch(Global.url + "personales/login", {
+    const request = await fetch(Global.url + "/personales/login", {
       method: "POST",
       body: JSON.stringify(usuarioLogin),
       headers: {
@@ -19,7 +19,7 @@ const Ingresar = () => {
     });
     const data = await request.json();
     console.log(data);
-    if (data.status == "ok") {
+    if (data.resultado == "ok") {
       // console.log(data);
       localStorage.setItem("token", data.user.token);
       localStorage.setItem(
@@ -38,7 +38,7 @@ const Ingresar = () => {
     <>
       <div className="container-login100">
         <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-          <form className="login100-form validate-form">
+          <form onSubmit={login} className="login100-form validate-form">
             <span className="login100-form-title p-b-49"> Inicio </span>
 
             <div
@@ -51,6 +51,7 @@ const Ingresar = () => {
                 type="text"
                 name="email"
                 placeholder="Type your Email"
+                onChange={cambiar}
               />
               <span className="focus-input100" data-symbol="&#xf206;"></span>
             </div>
@@ -63,8 +64,9 @@ const Ingresar = () => {
               <input
                 className="input100"
                 type="password"
-                name="pass"
+                name="password"
                 placeholder="Type your password"
+                onChange={cambiar}
               />
               <span className="focus-input100" data-symbol="&#xf190;"></span>
             </div>
@@ -72,7 +74,9 @@ const Ingresar = () => {
             <div className="container-login100-form-btn mt-3">
               <div className="wrap-login100-form-btn">
                 <div className="login100-form-bgbtn"></div>
-                <button className="login100-form-btn">Inicio</button>
+                <button type="submit" className="login100-form-btn">
+                  Inicio
+                </button>
               </div>
             </div>
 
