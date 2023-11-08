@@ -26,7 +26,7 @@ const Ingresar = () => {
         "usuario",
         JSON.stringify(data.user.email, data.user.id)
       );
-      window.location = "./components/layout/Inicio";
+      window.location = "/Inicio";
       setGuardado("Guardado");
     } else {
       //  console.log(data);
