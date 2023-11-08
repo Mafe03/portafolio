@@ -3,6 +3,8 @@ import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Ingresar from "../components/logica/Ingresar";
 import Registrarse from "../components/logica/Registrarse";
 import Inicio from "../components/layout/Inicio";
+import Estudios from "../components/layout/Estudios";
+import Proyectos from "../components/layout/Proyectos";
 
 const Routing = () => {
   //Creacion del sistema de rutas
@@ -12,6 +14,8 @@ const Routing = () => {
         <Route path="/Ingresar" element={<Ingresar />} />
         <Route path="/Inicio" element={<Inicio />} />
         <Route path="/Registro" element={<Registrarse />} />
+        <Route path="/Estudios" element={<Estudios />} />
+        <Route path="/Proyectos" element={<Proyectos />} />
       </Routes>
     </BrowserRouter>
   );
