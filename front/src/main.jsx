@@ -2,9 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 
-//assets
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.bundle.js";
-import "bootstrap-icons/font/bootstrap-icons.css";
+//portafolio Inicio
+import "./assets/vendor2/fontawesome-free/css/all.min.css";
+import "./assets/css2/sb-admin-2.min.css";
+//portafolio Fin
+
+//Login Inicio
+
+//Login Fin
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

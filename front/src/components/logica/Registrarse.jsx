@@ -12,7 +12,7 @@ const Registrarse = () => {
     e.preventDefault();
     let nuevoPersona = form;
     //guardar en la api
-    const request = await fetch(Global.url + "/personales/registrar", {
+    const request = await fetch(Global.url + "personales/registrar", {
       method: "POST",
       body: JSON.stringify(nuevoPersona),
       headers: {
@@ -29,6 +29,9 @@ const Registrarse = () => {
         html: <i>{mensaje}</i>,
         icon: "success",
       });
+      setTimeout(() => {
+        window.location = "./Ingresar";
+      }, 3000);
     } else {
       let titulo = data.Encabezado;
       let mensaje = data.mensaje;

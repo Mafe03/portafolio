@@ -24,6 +24,7 @@ const registrar = async (req, res) => {
     if (consulta.length > 0) {
       return res.status(400).send({
         mensaje: "ya existe el email o usuario",
+        Titulo: "Error",
       });
     } else {
       //encriptar y salvar
