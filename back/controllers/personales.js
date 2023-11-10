@@ -64,6 +64,29 @@ const listar = async (req, res) => {
   }
 };
 
+const listarUno = async (req, res) => {
+  try {
+    //obtener el id
+    let id = req.params.id;
+    consulta = await Personales.findById(id).exec();
+    return res.status(200).send({
+      status: "ok",
+      mensaje: " Ingreso exitoso !",
+      user: {
+        id: consulta._id,
+        email: consulta.email,
+        nombre: consulta.nombre,
+        apellidos: consulta.apodo,
+      },
+    });
+  } catch (error) {
+    return res.status(404).send({
+      nombreError: error.name,
+      Mensaje: "Error en la consulta : " + error.message,
+    });
+  }
+};
+
 const borrarUno = async (req, res) => {
   try {
     //obtener el id
@@ -117,7 +140,10 @@ const login = async (req, res) => {
     return res.status(400).send({
       resultado: "error",
       mensaje: "Usuario no existe en la BD",
-      consulta,
+      user: {
+        id: consulta._id,
+        email: consulta.email,
+      },
     });
   } else {
     let pwd = bcrypt.compareSync(data.password, consulta.password);
@@ -158,6 +184,7 @@ module.exports = {
   /* crear, */
   registrar,
   listar,
+  listarUno,
   borrarUno,
   editar,
   login,

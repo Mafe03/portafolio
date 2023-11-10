@@ -1,22 +1,32 @@
 import React from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
-import Ingresar from "../components/logica/Ingresar";
-import Registrarse from "../components/logica/Registrarse";
-import Inicio from "../components/layout/Inicio";
-import Estudios from "../components/layout/Estudios";
-import Proyectos from "../components/layout/Proyectos";
+import Ingresar from "../components/public/Ingresar";
+import Registrarse from "../components/public/Registrarse";
+import Inicio from "../components/private/Inicio";
+import { AuthProvider } from "../context/AuthProvider";
+import LayoutPublico from "../components/public/layoutPublico";
+import LayoutPrivado from "../components/private/LayoutPrivado";
+import Estudios from "../components/private/Estudios";
+import Proyectos from "../components/private/Proyectos";
 
 const Routing = () => {
   //Creacion del sistema de rutas
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/Ingresar" element={<Ingresar />} />
-        <Route path="/Inicio" element={<Inicio />} />
-        <Route path="/Registro" element={<Registrarse />} />
-        <Route path="/Estudios" element={<Estudios />} />
-        <Route path="/Proyectos" element={<Proyectos />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<LayoutPublico />}>
+            <Route index element={<Ingresar />} />
+            <Route path="Registro" element={<Registrarse />} />
+          </Route>
+
+          <Route path="/Dashboard/" element={<LayoutPrivado />}>
+            <Route index element={<Inicio />} />
+            <Route path="Estudios" element={<Estudios />} />
+            <Route path="Proyectos" element={<Proyectos />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

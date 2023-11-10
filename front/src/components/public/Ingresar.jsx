@@ -1,10 +1,12 @@
 import React, { Component, useState } from "react";
 import HelperForm from "../../helpers/HelperForm";
 import { Global } from "../../helpers/Global";
+import UseAuth from "../../helpers/UseAuth";
 
 const Ingresar = () => {
   const { form, cambiar } = HelperForm({});
   const [guardado, setGuardado] = useState("no_enviado");
+  const { setAutenticado } = UseAuth();
   //
   const login = async (e) => {
     e.preventDefault();
@@ -22,12 +24,11 @@ const Ingresar = () => {
     if (data.resultado == "ok") {
       // console.log(data);
       localStorage.setItem("token", data.user.token);
-      localStorage.setItem(
-        "usuario",
-        JSON.stringify(data.user.email, data.user.id)
-      );
-      window.location = "/Inicio";
+      localStorage.setItem("user", JSON.stringify(data.user));
+
       setGuardado("Guardado");
+      setAutenticado(data.user);
+      window.location.reload();
     } else {
       //  console.log(data);
       setGuardado("Error");

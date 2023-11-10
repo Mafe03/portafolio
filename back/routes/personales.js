@@ -9,6 +9,7 @@ const auth = require("../controllers/auth");
 
 router.post("/personales/registrar", personalesControlador.registrar);
 router.get("/personales/listar/:limite?", auth, personalesControlador.listar);
+router.get("/personales/listarUno/:id", auth, personalesControlador.listarUno);
 router.delete(
   "/personales/borrarUno/:id",
   auth,
