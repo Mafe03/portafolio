@@ -16,6 +16,7 @@ const registrar = async (req, res) => {
     estudiosGuardar.save();
     return res.status(200).send({
       status: "ok",
+      titulo: "Felicitaciones",
       mensaje: "Insertado con exito",
     });
   } catch (error) {

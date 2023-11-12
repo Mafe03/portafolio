@@ -8,6 +8,7 @@ import LayoutPublico from "../components/public/layoutPublico";
 import LayoutPrivado from "../components/private/LayoutPrivado";
 import Estudios from "../components/private/Estudios";
 import Proyectos from "../components/private/Proyectos";
+import AgregarEstudios from "../components/private/AgregarEstudios";
 
 const Routing = () => {
   //Creacion del sistema de rutas
@@ -23,6 +24,7 @@ const Routing = () => {
           <Route path="/Dashboard/" element={<LayoutPrivado />}>
             <Route index element={<Inicio />} />
             <Route path="Estudios" element={<Estudios />} />
+            <Route path="AgregarEstudio" element={<AgregarEstudios />} />
             <Route path="Proyectos" element={<Proyectos />} />
           </Route>
         </Routes>

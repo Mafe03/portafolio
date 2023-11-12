@@ -5,7 +5,6 @@ import UseAuth from "../../helpers/UseAuth";
 
 const Ingresar = () => {
   const { form, cambiar } = HelperForm({});
-  const [guardado, setGuardado] = useState("no_enviado");
   const { setAutenticado } = UseAuth();
   //
   const login = async (e) => {
@@ -31,7 +30,6 @@ const Ingresar = () => {
       window.location.reload();
     } else {
       //  console.log(data);
-      setGuardado("Error");
     }
   };
 
