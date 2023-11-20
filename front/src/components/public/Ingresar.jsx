@@ -25,7 +25,6 @@ const Ingresar = () => {
       localStorage.setItem("token", data.user.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      setGuardado("Guardado");
       setAutenticado(data.user);
       window.location.reload();
     } else {

@@ -7,16 +7,25 @@ const jwt = require("jsonwebtoken");
 
 const registrar = async (req, res) => {
   try {
-    let datos = req.body;
+    let persona = req.user.userId;
+    let nombre = req.body.nombre;
+    let detalle = req.body.detalle;
+    let link = req.body.link;
     //validar los datos
 
     //crear el objeto
-    const proyectosGuardar = new Proyectos(datos);
+    let crearProyecto = new Proyectos({
+      nombre: nombre,
+      detalle: detalle,
+      link: link,
+      Persona: persona,
+    });
 
-    proyectosGuardar.save();
+    crearProyecto.save();
     return res.status(200).send({
       status: "ok",
-      mensaje: "Insertado con exito",
+      titulo: "Felicitaciones",
+      mensaje: "Proyecto insertado con exito",
     });
   } catch (error) {
     return res.status(404).send({

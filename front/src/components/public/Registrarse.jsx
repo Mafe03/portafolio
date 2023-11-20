@@ -30,7 +30,7 @@ const Registrarse = () => {
         icon: "success",
       });
       setTimeout(() => {
-        window.location = "./Ingresar";
+        window.location = "./";
       }, 3000);
     } else {
       let titulo = data.Encabezado;

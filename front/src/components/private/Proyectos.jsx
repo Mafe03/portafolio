@@ -9,7 +9,9 @@ const Proyectos = () => {
       <div className="container-fluid">
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 className="h3 mb-0 text-gray-800">Proyectos</h1>
-          <button className="btn btn-primary">Agregar Proyecto</button>
+          <NavLink to="/Dashboard/AgregarProyectos" className="btn btn-primary">
+            Agregar Proyecto
+          </NavLink>
         </div>
 
         <div className="row">

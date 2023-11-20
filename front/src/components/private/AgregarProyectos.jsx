@@ -7,18 +7,18 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
-const AgregarEstudios = () => {
+const AgregarProyectos = () => {
   const { Autenticado } = UseAuth();
   const { form, cambiar } = HelperForm({});
   const token = localStorage.getItem("token");
 
-  const guardarEstudio = async (e) => {
+  const guardarProyecto = async (e) => {
     e.preventDefault();
-    let nuevoEstudio = form;
+    let nuevoProyecto = form;
     //guardar en la api
-    const request = await fetch(Global.url + "estudios/registrar", {
+    const request = await fetch(Global.url + "proyectos/registrar", {
       method: "POST",
-      body: JSON.stringify(nuevoEstudio),
+      body: JSON.stringify(nuevoProyecto),
       headers: {
         "Content-Type": "application/json",
         Authorization: `${token}`,
@@ -35,7 +35,7 @@ const AgregarEstudios = () => {
         icon: "success",
       });
       setTimeout(() => {
-        window.location = "./Estudios";
+        window.location = "./Proyectos";
       }, 3000);
     } else {
       let titulo = data.Encabezado;
@@ -53,7 +53,7 @@ const AgregarEstudios = () => {
     <>
       <div className="container-fluid">
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 className="h3 mb-0 text-gray-800">Agregar Estudios</h1>
+          <h1 className="h3 mb-0 text-gray-800">Agregar Proyectos</h1>
         </div>
 
         <div className="row">
@@ -62,24 +62,24 @@ const AgregarEstudios = () => {
             <div className="card shadow mb-4">
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-primary text-center">
-                  Datos de estudio
+                  Datos de Proyecto
                 </h6>
               </div>
               <div className="card-body">
                 <form
                   action=""
-                  onSubmit={guardarEstudio}
+                  onSubmit={guardarProyecto}
                   className="w-75 m-auto text-center"
                 >
                   <div className="input-group mb-4 mt-3">
                     <input
                       type="text"
                       className="form-control bg-light border-0 small"
-                      placeholder="Tipo de Estudio"
+                      placeholder="Nombre del Proyecto"
                       aria-label=""
                       aria-describedby="basic-addon2"
-                      id="tipo"
-                      name="tipo"
+                      id="nombre"
+                      name="nombre"
                       required
                       onChange={cambiar}
                     />
@@ -99,32 +99,18 @@ const AgregarEstudios = () => {
                   </div>
                   <div className="input-group mb-4">
                     <input
-                      type="date"
-                      className="form-control bg-light border-0 small"
-                      placeholder="Fecha Fin"
-                      aria-label=""
-                      aria-describedby="basic-addon2"
-                      id="fechaFin"
-                      name="fechaFin"
-                      required
-                      onChange={cambiar}
-                    />
-                  </div>
-                  <div className="input-group mb-4">
-                    <input
                       type="text"
                       className="form-control bg-light border-0 small"
-                      placeholder="Nota"
+                      placeholder="Link"
                       aria-label=""
                       aria-describedby="basic-addon2"
-                      id="notas"
-                      name="notas"
+                      id="link"
+                      name="link"
                       required
                       onChange={cambiar}
                     />
                   </div>
-
-                  <button className="btn btn-primary">Agregar Estudio</button>
+                  <button className="btn btn-primary">Agregar Proyecto</button>
                 </form>
               </div>
             </div>
@@ -136,4 +122,4 @@ const AgregarEstudios = () => {
   );
 };
 
-export default AgregarEstudios;
+export default AgregarProyectos;
