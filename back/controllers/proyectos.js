@@ -37,19 +37,50 @@ const registrar = async (req, res) => {
 
 const listar = async (req, res) => {
   try {
-    let limite = req.params.limite;
-    let consulta = await Proyectos.find({})
-      .sort({ _id: -1 })
-      .limit(limite)
-      .exec();
-    return res.status(200).send({
-      longitud_resultado: consulta.length,
-      resultado: consulta,
-    });
+    let pagina;
+    if (req.params.pagina) {
+      pagina = req.params.pagina;
+    }
+    pagina = parseInt(pagina);
+    let itemsPerPage = 5;
+    const options = {
+      page: pagina,
+      limit: itemsPerPage,
+      sort: { _id: 1 },
+    };
+    Proyectos.paginate({}, options)
+      .then((result) => {
+        if (!result) {
+          return res.status(400).send({
+            id: 400,
+            Encabezado: "Error",
+            mensaje: "No hay registros",
+          });
+        } else {
+          return res.status(200).send({
+            id: 200,
+            Encabezado: "Felicitaciones",
+            mensaje: "Lista de Proyectos",
+            perfiles: result.docs,
+            pagina,
+            limite: result.limit,
+            totalPaginas: result.totalPages,
+            registros: result.totalDocs,
+          });
+        }
+      })
+      .catch((error) => {
+        return res.status(400).send({
+          id: 400,
+          Encabezado: "Error",
+          mensaje: "Error al Generar: " + error,
+        });
+      });
   } catch (error) {
-    return res.status(404).send({
-      nombreError: error.name,
-      Mensaje: "Error en la consulta : " + error.message,
+    return res.status(400).send({
+      id: 400,
+      Encabezado: "Error",
+      mensaje: "Error de Consulta: " + error.messages,
     });
   }
 };
