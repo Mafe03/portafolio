@@ -8,6 +8,7 @@ import "./assets/css2/sb-admin-2.min.css";
 //portafolio Fin
 
 //Login Inicio
+
 import "../src/assets/vendor/bootstrap/css/bootstrap.min.css";
 import "../src/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css";
 import "../src/assets/fonts/iconic/css/material-design-iconic-font.min.css";

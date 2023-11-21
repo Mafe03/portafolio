@@ -9,31 +9,6 @@ const Estudios = () => {
   const [estudios, setEstudios] = useState(null);
   const token = localStorage.getItem("token");
 
-  fetch(Global.url + "estudios/listar", {
-    method: "GET",
-    headers: {
-      Authorization: `${token}`,
-    },
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (data.resultado.length == 0) {
-        console.log("ACA ESTA");
-        setEstudios(null);
-      } else {
-        setEstudios(data.resultado);
-        console.log(estudios);
-      }
-
-      //console.log("DATA PERFILES", data.perfiles);
-    })
-    .catch((error) => {
-      console.error("Error en la solicitud:", error);
-    });
-
   return (
     <>
       <div className="container-fluid">

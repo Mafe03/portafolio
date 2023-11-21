@@ -94,12 +94,15 @@ const borrarUno = async (req, res) => {
     let id = req.params.id;
     consulta = await Estudios.findOneAndDelete(id).exec();
     return res.status(200).send({
-      resultado: "success",
+      id: 200,
+      Encabezado: "Correcto",
+      mensaje: "Eliminado Correctamente",
     });
   } catch (error) {
     return res.status(404).send({
-      nombreError: error.name,
-      Mensaje: "Error en la consulta : " + error.message,
+      id: 400,
+      Encabezado: "Error",
+      mensaje: "Error de Consulta: " + error.messages,
     });
   }
 };

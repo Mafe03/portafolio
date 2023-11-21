@@ -36,7 +36,7 @@ const AgregarEstudios = () => {
       });
       setTimeout(() => {
         window.location = "./Estudios";
-      }, 3000);
+      }, 1000);
     } else {
       let titulo = data.Encabezado;
       let mensaje = data.mensaje;
@@ -111,17 +111,20 @@ const AgregarEstudios = () => {
                     />
                   </div>
                   <div className="input-group mb-4">
-                    <input
-                      type="text"
+                    <select
+                      name="notas"
+                      id="notas"
                       className="form-control bg-light border-0 small"
                       placeholder="Nota"
                       aria-label=""
                       aria-describedby="basic-addon2"
-                      id="notas"
-                      name="notas"
-                      required
                       onChange={cambiar}
-                    />
+                      required
+                    >
+                      <option value="N/A">Seleccione una nota</option>
+                      <option value="Aprobado">Aprobado</option>
+                      <option value="No Aprobado">No Aprobado</option>
+                    </select>
                   </div>
 
                   <button className="btn btn-primary">Agregar Estudio</button>

@@ -36,7 +36,7 @@ const AgregarProyectos = () => {
       });
       setTimeout(() => {
         window.location = "./Proyectos";
-      }, 3000);
+      }, 1000);
     } else {
       let titulo = data.Encabezado;
       let mensaje = data.mensaje;
