@@ -167,7 +167,7 @@ const Proyectos = () => {
                                     handleClose={handleClose}
                                     id={proyecto._id}
                                     nombre={proyecto.nombre}
-                                    detalle={proyecto.detalle}
+                                    descripcion={proyecto.detalle}
                                     link={proyecto.link}
                                     setEditar={setEditar}
                                   ></EditarProyecto>

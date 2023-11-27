@@ -112,6 +112,8 @@ const editar = async (req, res) => {
     let consulta = await Proyectos.findOneAndUpdate({ _id: id }, data).exec();
     return res.status(200).send({
       resultado: "success",
+      titulo: "Felicitaciones",
+      mensaje: "Proyecto editado correctamente",
       consulta,
     });
   } catch (error) {

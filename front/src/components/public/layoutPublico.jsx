@@ -4,7 +4,15 @@ import UseAuth from "../../helpers/UseAuth";
 
 const LayoutPublico = () => {
   const { Autenticado } = UseAuth();
-  return <>{!Autenticado.id ? <Outlet /> : <Navigate to="/Dashboard" />}</>;
+  return (
+    <>
+      {!Autenticado || !Autenticado.id ? (
+        <Outlet />
+      ) : (
+        <Navigate to="/Dashboard" />
+      )}
+    </>
+  );
 };
 
 export default LayoutPublico;

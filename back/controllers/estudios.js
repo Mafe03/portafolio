@@ -96,7 +96,7 @@ const borrarUno = async (req, res) => {
     return res.status(200).send({
       id: 200,
       Encabezado: "Correcto",
-      mensaje: "Eliminado Correctamente",
+      mensaje: "Estudio eliminado Correctamente",
     });
   } catch (error) {
     return res.status(404).send({
@@ -115,12 +115,14 @@ const editar = async (req, res) => {
     let consulta = await Estudios.findOneAndUpdate({ _id: id }, data).exec();
     return res.status(200).send({
       resultado: "success",
+      titulo: "Felicitaciones",
+      mensaje: "Estudio editado correctamente",
       consulta,
     });
   } catch (error) {
     return res.status(404).send({
       nombreError: error.name,
-      Mensaje: "Error en la actualizacion : " + error.message,
+      MensajeError: "Error en la edición: " + error.message,
     });
   }
 };

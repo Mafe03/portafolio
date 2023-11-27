@@ -11,9 +11,10 @@ const ModalEditar = ({
   show,
   handleClose,
   id,
-  nombre,
-  descripcion,
-  link,
+  tipo,
+  detalle,
+  fechaFin,
+  notas,
   setEditar,
 }) => {
   const { form, cambiar } = HelperForm({});
@@ -21,7 +22,7 @@ const ModalEditar = ({
   const Editar = async (e) => {
     e.preventDefault();
     let formulario = form;
-    const request = await fetch(Global.url + `proyectos/editar/${id}`, {
+    const request = await fetch(Global.url + `estudios/editar/${id}`, {
       method: "PUT",
       body: JSON.stringify(formulario),
       headers: {
@@ -43,8 +44,8 @@ const ModalEditar = ({
         window.location.reload();
       }, 500);
     } else {
-      let nombreError = data.nombreError;
-      let mensaje = data.Mensaje;
+      let nombreError = data.tituloError;
+      let mensaje = data.mensajeError;
       MySwal.fire({
         title: <strong> {nombreError}</strong>,
         html: <i>{mensaje}</i>,
@@ -66,9 +67,11 @@ const ModalEditar = ({
                   type="text"
                   className="form-control form-control-user"
                   id="exampleInputEmail"
-                  name="nombre"
+                  placeholder="tipo"
+                  name="tipo"
                   onChange={cambiar}
-                  defaultValue={nombre}
+                  defaultValue={tipo}
+                  required
                 />
               </div>
             </div>
@@ -78,21 +81,40 @@ const ModalEditar = ({
                 className="form-control form-control-user"
                 id="exampleInputEmail"
                 name="detalle"
-                placeholder="Descripcion"
+                placeholder="Detalle"
                 onChange={cambiar}
-                defaultValue={descripcion}
+                defaultValue={detalle}
               />
             </div>
             <div className="form-group">
               <input
-                type="text"
-                className="form-control form-control-user"
-                id="exampleInputEmail"
-                placeholder="Link"
-                name="link"
+                type="date"
+                className="form-control bg-light border-0 small"
+                placeholder="Fecha Fin"
+                aria-label=""
+                aria-describedby="basic-addon2"
+                id="fechaFin"
+                name="fechaFin"
+                defaultValue={fechaFin}
+                required
                 onChange={cambiar}
-                defaultValue={link}
               />
+            </div>
+            <div className="input-group mb-4">
+              <select
+                name="notas"
+                id="notas"
+                className="form-control bg-light border-0 small"
+                placeholder="Nota"
+                aria-label=""
+                aria-describedby="basic-addon2"
+                onChange={cambiar}
+                required
+              >
+                <option value="N/A">Seleccione una nota</option>
+                <option value="Aprobado">Aprobado</option>
+                <option value="No Aprobado">No Aprobado</option>
+              </select>
             </div>
 
             <hr />
