@@ -128,56 +128,59 @@ const login = async (req, res) => {
   //validamos que la data esté completa
   if (!data.email || !data.password) {
     res.status(400).send({
-      resultado: "error",
-      mensaje: "faltan datos por enviar del formulario ! ",
+      resultado: "errorVacio",
+      titulo: "Error",
+      mensaje: "Complete los campos vacios",
     });
-  }
+  } else {
+    // buscar en la bd el usuario y validar
+    let consulta = await Personales.findOne({ email: data.email }).exec();
+    if (consulta == null) {
+      return res.status(400).send({
+        titulo: "Error",
+        mensaje: "El usuario no se encuentra registrado",
+        resultado: "errorUser",
+      });
+    } else {
+      let pwd = bcrypt.compareSync(data.password, consulta.password);
+      if (!pwd) {
+        return res.status(400).send({
+          titulo: "Error",
+          mensaje: "Contraseña incorrecta",
+          resultado: "errorPass",
+        });
+      }
+    }
 
-  // buscar en la bd el usuario  y validar
+    //generamos el token  --- sencillo
 
-  let consulta = await Personales.findOne({ email: data.email }).exec();
-  if (consulta == null) {
-    return res.status(400).send({
-      resultado: "error",
-      mensaje: "Usuario no existe en la BD",
+    const token = jwt.sign(
+      {
+        userId: consulta._id,
+        email: consulta.email,
+      },
+      "SeCrEtO",
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    //resultado final del método
+    return res.status(200).send({
+      resultado: "ok",
+      mensaje: " Ingreso exitoso!",
       user: {
         id: consulta._id,
         email: consulta.email,
+        nombre: consulta.nombre,
+        apellidos: consulta.apellidos,
+        direccion: consulta.direccion,
+        telefono: consulta.telefono,
+        fechaNace: consulta.fechaNace,
+        token: token,
       },
     });
-  } else {
-    let pwd = bcrypt.compareSync(data.password, consulta.password);
-    if (!pwd) {
-      return res.status(400).send({
-        resultado: "error",
-        mensaje: "Password Erronea !",
-      });
-    }
   }
-
-  //generamos el token  --- sencillo
-
-  const token = jwt.sign(
-    {
-      userId: consulta._id,
-      email: consulta.email,
-    },
-    "SeCrEtO",
-    {
-      expiresIn: "1d",
-    }
-  );
-
-  //resultado final del método
-  return res.status(200).send({
-    resultado: "ok",
-    mensaje: " Ingreso exitoso !",
-    user: {
-      id: consulta._id,
-      email: consulta.email,
-      token: token,
-    },
-  });
 };
 
 module.exports = {

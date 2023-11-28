@@ -61,7 +61,7 @@ const AgregarProyectos = () => {
           <div className="col-lg-8 mb-4">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary text-center">
+                <h6 className="m-0 font-weight-bold text-center" id="titulos">
                   Datos de Proyecto
                 </h6>
               </div>
@@ -110,7 +110,9 @@ const AgregarProyectos = () => {
                       onChange={cambiar}
                     />
                   </div>
-                  <button className="btn btn-primary">Agregar Proyecto</button>
+                  <button className="btn" id="botones">
+                    Agregar Proyecto
+                  </button>
                 </form>
               </div>
             </div>

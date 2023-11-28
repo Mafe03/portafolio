@@ -2,6 +2,9 @@ import React, { Component, useState } from "react";
 import HelperForm from "../../helpers/HelperForm";
 import { Global } from "../../helpers/Global";
 import UseAuth from "../../helpers/UseAuth";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
 const Ingresar = () => {
   const { form, cambiar } = HelperForm({});
@@ -19,7 +22,6 @@ const Ingresar = () => {
       },
     });
     const data = await request.json();
-    console.log(data);
     if (data.resultado == "ok") {
       // console.log(data);
       localStorage.setItem("token", data.user.token);
@@ -28,7 +30,31 @@ const Ingresar = () => {
       setAutenticado(data.user);
       window.location.reload();
     } else {
-      //  console.log(data);
+      if (data.resultado == "errorUser") {
+        let titulo = data.titulo;
+        let mensaje = data.mensaje;
+        MySwal.fire({
+          title: <strong> {titulo}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "error",
+        });
+      } else if (data.resultado == "errorPass") {
+        let titulo = data.titulo;
+        let mensaje = data.mensaje;
+        MySwal.fire({
+          title: <strong> {titulo}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "error",
+        });
+      } else if (data.resultado == "errorVacio") {
+        let titulo = data.titulo;
+        let mensaje = data.mensaje;
+        MySwal.fire({
+          title: <strong> {titulo}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "error",
+        });
+      }
     }
   };
 

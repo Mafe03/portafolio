@@ -61,7 +61,7 @@ const AgregarEstudios = () => {
           <div className="col-lg-8 mb-4">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary text-center">
+                <h6 className="m-0 font-weight-bold text-center" id="titulos">
                   Datos de estudio
                 </h6>
               </div>
@@ -121,13 +121,15 @@ const AgregarEstudios = () => {
                       onChange={cambiar}
                       required
                     >
-                      <option value="N/A">Seleccione una nota</option>
+                      <option disabled>Seleccione una nota</option>
                       <option value="Aprobado">Aprobado</option>
                       <option value="No Aprobado">No Aprobado</option>
                     </select>
                   </div>
 
-                  <button className="btn btn-primary">Agregar Estudio</button>
+                  <button className="btn" id="botones">
+                    Agregar Estudio
+                  </button>
                 </form>
               </div>
             </div>

@@ -57,7 +57,7 @@ const ModalEditar = ({
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar</Modal.Title>
+          <Modal.Title>Editar Estudio</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="user" onSubmit={Editar}>
@@ -65,10 +65,12 @@ const ModalEditar = ({
               <div className="form-group">
                 <input
                   type="text"
-                  className="form-control form-control-user"
+                  className="form-control bg-light border-0 small"
                   id="exampleInputEmail"
                   placeholder="tipo"
                   name="tipo"
+                  aria-label=""
+                  aria-describedby="basic-addon2"
                   onChange={cambiar}
                   defaultValue={tipo}
                   required
@@ -78,8 +80,10 @@ const ModalEditar = ({
             <div className="form-group">
               <input
                 type="text"
-                className="form-control form-control-user"
+                className="form-control bg-light border-0 small"
                 id="exampleInputEmail"
+                aria-label=""
+                aria-describedby="basic-addon2"
                 name="detalle"
                 placeholder="Detalle"
                 onChange={cambiar}
@@ -111,19 +115,18 @@ const ModalEditar = ({
                 onChange={cambiar}
                 required
               >
-                <option value="N/A">Seleccione una nota</option>
+                <option disabled>Seleccione una nota</option>
                 <option value="Aprobado">Aprobado</option>
                 <option value="No Aprobado">No Aprobado</option>
               </select>
             </div>
 
             <hr />
-            <button
-              type="submit"
-              className="btn btn-facebook btn-user btn-block"
-            >
-              Editar
-            </button>
+            <div className="text-center">
+              <button type="submit" className="btn" id="botones">
+                Editar
+              </button>
+            </div>
           </form>
         </Modal.Body>
       </Modal>

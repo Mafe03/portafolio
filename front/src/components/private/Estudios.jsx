@@ -78,8 +78,8 @@ const Estudios = () => {
     if (page >= totalp) {
       MySwal.fire({
         icon: "error",
-        title: "Oppss..",
-        text: "No hay mas informacion\npara mostrar",
+        title: "Error",
+        text: "No hay mas información disponible",
       });
     } else {
       let next = page + 1;
@@ -92,8 +92,8 @@ const Estudios = () => {
     if (page == 1) {
       MySwal.fire({
         icon: "error",
-        title: "Oppss..",
-        text: "Ya estas en la Primera Pagina",
+        title: "Error",
+        text: "Ya te encuentras en la primer pagina",
       });
     } else {
       let next = page - 1;
@@ -111,8 +111,8 @@ const Estudios = () => {
       <div className="container-fluid">
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 className="h3 mb-0 text-gray-800">Estudios</h1>
-          <NavLink to="/Dashboard/AgregarEstudio" className="btn btn-primary">
-            Agregar Estudio
+          <NavLink to="/Dashboard/AgregarEstudio" className="btn" id="botones">
+            <i className="bi bi-plus-square-dotted"></i> Agregar Estudio
           </NavLink>
         </div>
 
@@ -120,14 +120,14 @@ const Estudios = () => {
           <div className="col-lg-12 mb-4">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary text-center">
+                <h6 className="m-0 font-weight-bold text-center" id="titulos">
                   Mis Estudios
                 </h6>
               </div>
               <div className="card-body">
-                <div class="table-responsive">
+                <div className="table-responsive">
                   <table
-                    class="table table-bordered"
+                    className="table table-bordered"
                     id="dataTable"
                     width="100%"
                     cellspacing="0"
@@ -154,7 +154,8 @@ const Estudios = () => {
                               <td>
                                 <button
                                   type="button"
-                                  className="btn btn-info"
+                                  className="btn"
+                                  id="botones"
                                   onClick={() => {
                                     setEditar(estudio._id);
                                     handleShow();
@@ -183,7 +184,7 @@ const Estudios = () => {
                                     eliminarEstudio(estudio._id, estudio.tipo);
                                   }}
                                 >
-                                  <i class="bi bi-trash-fill"></i>
+                                  <i className="bi bi-trash-fill"></i>
                                 </button>
                               </td>
                             </tr>
@@ -194,11 +195,34 @@ const Estudios = () => {
                           className="text-center"
                           style={{ textAlign: "center" }}
                         >
-                          No se encobtraron estudios registrados
+                          No se encontraron estudios registrados
                         </h1>
                       )}
                     </tbody>
                   </table>
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination justify-content-center">
+                      <li className="page-item">
+                        <button
+                          id="anterior"
+                          onClick={AntPage}
+                          className="page-link"
+                        >
+                          Anterior
+                        </button>
+                      </li>
+                      <li className="page-item">
+                        <button
+                          id="siguiente"
+                          onClick={NextPage}
+                          className="page-link"
+                          href="#"
+                        >
+                          Siguiente
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
               </div>
             </div>

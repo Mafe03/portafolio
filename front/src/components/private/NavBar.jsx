@@ -10,7 +10,7 @@ const NavBar = () => {
 
           <li className="nav-item dropdown no-arrow">
             <a
-              className="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle "
               href="#"
               id="userDropdown"
               role="button"
@@ -18,13 +18,10 @@ const NavBar = () => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                Usuario
+              <span className="mr-2 d-none d-lg-inline text-gray-600 small ">
+                Cerrar sesión
               </span>
-              <img
-                className="img-profile rounded-circle"
-                src="img/undraw_profile.svg"
-              />
+              <i class="bi bi-box-arrow-right"></i>
             </a>
           </li>
         </ul>

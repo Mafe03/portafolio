@@ -40,17 +40,21 @@ const registrar = async (req, res) => {
 
 const listar = async (req, res) => {
   try {
-    let pagina;
-    if (req.params.pagina) {
-      pagina = req.params.pagina;
+    let pagina = parseInt(req.params.pagina);
+    if (isNaN(pagina) || pagina <= 0) {
+      return res.status(400).send({
+        id: 400,
+        Encabezado: "Error",
+        mensaje: "Número de página inválido",
+      });
     }
-    pagina = parseInt(pagina);
     let itemsPerPage = 5;
     const options = {
       page: pagina,
       limit: itemsPerPage,
       sort: { _id: 1 },
     };
+
     Estudios.paginate({}, options)
       .then((result) => {
         if (!result) {
@@ -83,7 +87,7 @@ const listar = async (req, res) => {
     return res.status(400).send({
       id: 400,
       Encabezado: "Error",
-      mensaje: "Error de Consulta: " + error.messages,
+      mensaje: "Error de Consulta: " + error.message,
     });
   }
 };

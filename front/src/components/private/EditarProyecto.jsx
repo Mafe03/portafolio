@@ -12,7 +12,7 @@ const ModalEditar = ({
   handleClose,
   id,
   nombre,
-  descripcion,
+  detalle,
   link,
   setEditar,
 }) => {
@@ -56,52 +56,59 @@ const ModalEditar = ({
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar</Modal.Title>
+          <Modal.Title>Editar Proyecto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className="user" onSubmit={Editar}>
-            <div className="form-group">
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control form-control-user"
-                  id="exampleInputEmail"
-                  name="nombre"
-                  onChange={cambiar}
-                  defaultValue={nombre}
-                />
-              </div>
-            </div>
-            <div className="form-group">
+          <form onSubmit={Editar}>
+            <div className="input-group mb-4 mt-3">
               <input
                 type="text"
-                className="form-control form-control-user"
-                id="exampleInputEmail"
-                name="detalle"
-                placeholder="Descripcion"
+                className="form-control bg-light border-0 small"
+                placeholder="Nombre del Proyecto"
+                aria-label=""
+                aria-describedby="basic-addon2"
+                id="nombre"
+                name="nombre"
+                required
                 onChange={cambiar}
-                defaultValue={descripcion}
+                defaultValue={nombre}
+              />
+            </div>
+            <div className="input-group mb-4">
+              <input
+                type="text"
+                className="form-control bg-light border-0 small"
+                placeholder="Detalle"
+                aria-label=""
+                aria-describedby="basic-addon2"
+                id="detalle"
+                name="detalle"
+                required
+                onChange={cambiar}
+                defaultValue={detalle}
               />
             </div>
             <div className="form-group">
               <input
                 type="text"
-                className="form-control form-control-user"
-                id="exampleInputEmail"
+                className="form-control bg-light border-0 small"
+                aria-label=""
+                aria-describedby="basic-addon2"
+                id="link"
                 placeholder="Link"
                 name="link"
                 onChange={cambiar}
                 defaultValue={link}
+                required
               />
             </div>
 
             <hr />
-            <button
-              type="submit"
-              className="btn btn-facebook btn-user btn-block"
-            >
-              Editar
-            </button>
+            <div className="text-center">
+              <button type="submit" className="btn" id="botones">
+                Editar
+              </button>
+            </div>
           </form>
         </Modal.Body>
       </Modal>
