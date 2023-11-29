@@ -64,7 +64,7 @@ const Registrarse = () => {
                 name="nombre"
                 onChange={cambiar}
               />
-              <span className="focus-input100" data-symbol="&#xf206;"></span>
+              <span className="focus-input100"></span>
             </div>
             <div
               className="wrap-input100 validate-input m-b-23"
@@ -77,7 +77,7 @@ const Registrarse = () => {
                 name="apellidos"
                 onChange={cambiar}
               />
-              <span className="focus-input100" data-symbol="&#xf206;"></span>
+              <span className="focus-input100"></span>
             </div>
             <div
               className="wrap-input100 validate-input m-b-23"
@@ -103,11 +103,11 @@ const Registrarse = () => {
                 name="email"
                 onChange={cambiar}
               />
-              <span className="focus-input100" data-symbol="&#xf206;"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div
-              className="wrap-input100 validate-input"
+              className="wrap-input100 validate-input m-b-23"
               data-validate="Password is required"
             >
               <span className="label-input100">Password</span>
@@ -117,7 +117,7 @@ const Registrarse = () => {
                 name="password"
                 onChange={cambiar}
               />
-              <span className="focus-input100" data-symbol="&#xf190;"></span>
+              <span className="focus-input100"></span>
             </div>
             <div
               className="wrap-input100 validate-input m-b-23"
@@ -130,7 +130,7 @@ const Registrarse = () => {
                 name="direccion"
                 onChange={cambiar}
               />
-              <span className="focus-input100" data-symbol="&#xf206;"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div
@@ -144,7 +144,7 @@ const Registrarse = () => {
                 name="telefono"
                 onChange={cambiar}
               />
-              <span className="focus-input100" data-symbol="&#xf206;"></span>
+              <span className="focus-input100"></span>
             </div>
 
             <div className="container-login100-form-btn mt-3">
@@ -154,6 +154,10 @@ const Registrarse = () => {
                   Registrarse
                 </button>
               </div>
+            </div>
+            <div className="txt1 text-center p-t-54 p-b-20">
+              <span> Ya estas registrado? </span>
+              <a href="/">Inicia sesion</a>
             </div>
           </form>
         </div>

@@ -8,7 +8,7 @@ const auth = require("../controllers/auth");
 //configuracion de subidad de archivos
 
 router.post("/proyectos/registrar", auth, proyectosControlador.registrar);
-router.get("/proyectos/listar/:limite?", auth, proyectosControlador.listar);
+router.get("/proyectos/listar/:page", auth, proyectosControlador.listar);
 router.delete("/proyectos/borrarUno/:id", auth, proyectosControlador.borrarUno);
 router.put("/proyectos/editar/:id", auth, proyectosControlador.editar);
 module.exports = router;

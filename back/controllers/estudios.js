@@ -38,58 +38,49 @@ const registrar = async (req, res) => {
   }
 };
 
-const listar = async (req, res) => {
-  try {
-    let pagina = parseInt(req.params.pagina);
-    if (isNaN(pagina) || pagina <= 0) {
-      return res.status(400).send({
-        id: 400,
-        Encabezado: "Error",
-        mensaje: "Número de página inválido",
-      });
-    }
-    let itemsPerPage = 5;
-    const options = {
-      page: pagina,
-      limit: itemsPerPage,
-      sort: { _id: 1 },
-    };
-
-    Estudios.paginate({}, options)
-      .then((result) => {
-        if (!result) {
-          return res.status(400).send({
-            id: 400,
-            Encabezado: "Error",
-            mensaje: "No hay registros",
-          });
-        } else {
-          return res.status(200).send({
-            id: 200,
-            Encabezado: "Felicitaciones",
-            mensaje: "Lista de Personas",
-            perfiles: result.docs,
-            pagina,
-            limite: result.limit,
-            totalPaginas: result.totalPages,
-            registros: result.totalDocs,
-          });
-        }
-      })
-      .catch((error) => {
-        return res.status(400).send({
-          id: 400,
-          Encabezado: "Error",
-          mensaje: "Error al Generar: " + error,
-        });
-      });
-  } catch (error) {
-    return res.status(400).send({
-      id: 400,
-      Encabezado: "Error",
-      mensaje: "Error de Consulta: " + error.message,
-    });
+//listar todos los estudios de los que sigo
+const listar = (req, res) => {
+  //pagina actual
+  let page;
+  if (req.params.page) {
+    page = req.params.page;
   }
+  page = parseInt(page);
+  let itemsPerPage = 5;
+  // necesario para el funcionamiento del moongoose paginate v2
+  const options = {
+    page,
+    limit: itemsPerPage,
+    sort: { _id: 1 },
+  };
+
+  Estudios.paginate({}, options)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).send({
+          status: "error",
+          mensaje: "No hay Registros para mostrar!",
+        });
+      }
+
+      // devuelve el resultado
+      return res.status(200).send({
+        status: "ok",
+        mensaje: "Ejecución exitosa !",
+        estudios: result.docs,
+        page,
+        limite: result.limit,
+        totalPaginas: result.totalPages,
+        totalRegistros: result.totalDocs,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).send({
+        status: "error",
+        mensaje: "error al generar el listado",
+        error,
+      });
+    });
 };
 
 const borrarUno = async (req, res) => {

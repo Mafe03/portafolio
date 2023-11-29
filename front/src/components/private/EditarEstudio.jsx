@@ -22,35 +22,43 @@ const ModalEditar = ({
   const Editar = async (e) => {
     e.preventDefault();
     let formulario = form;
-    const request = await fetch(Global.url + `estudios/editar/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(formulario),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    });
-    const data = await request.json();
-    if (data.resultado == "success") {
-      let titulo = data.titulo;
-      let mensaje = data.mensaje;
+    if (formulario.notas == null) {
       MySwal.fire({
-        title: <strong> {titulo}</strong>,
-        html: <i>{mensaje}</i>,
-        icon: "success",
-      });
-      setEditar(0);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
-    } else {
-      let nombreError = data.tituloError;
-      let mensaje = data.mensajeError;
-      MySwal.fire({
-        title: <strong> {nombreError}</strong>,
-        html: <i>{mensaje}</i>,
+        title: <strong>Error</strong>,
+        html: <i>Porfavor seleccione una nota</i>,
         icon: "error",
       });
+    } else {
+      const request = await fetch(Global.url + `estudios/editar/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(formulario),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      });
+      const data = await request.json();
+      if (data.resultado == "success") {
+        let titulo = data.titulo;
+        let mensaje = data.mensaje;
+        MySwal.fire({
+          title: <strong> {titulo}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "success",
+        });
+        setEditar(0);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      } else {
+        let nombreError = data.tituloError;
+        let mensaje = data.mensajeError;
+        MySwal.fire({
+          title: <strong> {nombreError}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "error",
+        });
+      }
     }
   };
   return (
@@ -90,6 +98,7 @@ const ModalEditar = ({
                 defaultValue={detalle}
               />
             </div>
+            <label>Fecha fin</label>
             <div className="form-group">
               <input
                 type="date"
@@ -115,7 +124,9 @@ const ModalEditar = ({
                 onChange={cambiar}
                 required
               >
-                <option disabled>Seleccione una nota</option>
+                <option hidden disabled selected>
+                  Seleccione una nota
+                </option>
                 <option value="Aprobado">Aprobado</option>
                 <option value="No Aprobado">No Aprobado</option>
               </select>

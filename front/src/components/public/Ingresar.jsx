@@ -26,7 +26,6 @@ const Ingresar = () => {
       // console.log(data);
       localStorage.setItem("token", data.user.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
       setAutenticado(data.user);
       window.location.reload();
     } else {
@@ -75,7 +74,7 @@ const Ingresar = () => {
                 className="input100"
                 type="text"
                 name="email"
-                placeholder="Type your Email"
+                placeholder="Escribe tu email"
                 onChange={cambiar}
               />
               <span className="focus-input100" data-symbol="&#xf206;"></span>
@@ -90,7 +89,7 @@ const Ingresar = () => {
                 className="input100"
                 type="password"
                 name="password"
-                placeholder="Type your password"
+                placeholder="Escribe tu contraseña"
                 onChange={cambiar}
               />
               <span className="focus-input100" data-symbol="&#xf190;"></span>

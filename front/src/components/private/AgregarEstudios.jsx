@@ -15,37 +15,46 @@ const AgregarEstudios = () => {
   const guardarEstudio = async (e) => {
     e.preventDefault();
     let nuevoEstudio = form;
-    //guardar en la api
-    const request = await fetch(Global.url + "estudios/registrar", {
-      method: "POST",
-      body: JSON.stringify(nuevoEstudio),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    });
-    const data = await request.json();
 
-    if (data.status == "ok") {
-      let titulo = data.titulo;
-      let mensaje = data.mensaje;
-      MySwal.fire({
-        title: <strong> {titulo}</strong>,
-        html: <i>{mensaje}</i>,
-        icon: "success",
+    if (nuevoEstudio.notas != null) {
+      //guardar en la api
+      const request = await fetch(Global.url + "estudios/registrar", {
+        method: "POST",
+        body: JSON.stringify(nuevoEstudio),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
       });
-      setTimeout(() => {
-        window.location = "./Estudios";
-      }, 1000);
+
+      const data = await request.json();
+
+      if (data.status == "ok") {
+        let titulo = data.titulo;
+        let mensaje = data.mensaje;
+        MySwal.fire({
+          title: <strong> {titulo}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "success",
+        });
+        setTimeout(() => {
+          window.location = "./Estudios";
+        }, 1000);
+      } else {
+        let titulo = data.Encabezado;
+        let mensaje = data.mensaje;
+        MySwal.fire({
+          title: <strong> {titulo}</strong>,
+          html: <i>{mensaje}</i>,
+          icon: "error",
+        });
+      }
     } else {
-      let titulo = data.Encabezado;
-      let mensaje = data.mensaje;
       MySwal.fire({
-        title: <strong> {titulo}</strong>,
-        html: <i>{mensaje}</i>,
+        title: <strong>Error</strong>,
+        html: <i>Porfavor seleccione una nota</i>,
         icon: "error",
       });
-      // console.log(data);
     }
   };
 
@@ -69,7 +78,7 @@ const AgregarEstudios = () => {
                 <form
                   action=""
                   onSubmit={guardarEstudio}
-                  className="w-75 m-auto text-center"
+                  className="w-75 m-auto "
                 >
                   <div className="input-group mb-4 mt-3">
                     <input
@@ -84,7 +93,7 @@ const AgregarEstudios = () => {
                       onChange={cambiar}
                     />
                   </div>
-                  <div className="input-group mb-4">
+                  <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control bg-light border-0 small"
@@ -97,7 +106,8 @@ const AgregarEstudios = () => {
                       onChange={cambiar}
                     />
                   </div>
-                  <div className="input-group mb-4">
+                  <label>Fecha fin</label>
+                  <div className="input-group mb-4 form-floating">
                     <input
                       type="date"
                       className="form-control bg-light border-0 small"
@@ -121,15 +131,18 @@ const AgregarEstudios = () => {
                       onChange={cambiar}
                       required
                     >
-                      <option disabled>Seleccione una nota</option>
+                      <option hidden disabled selected value={null}>
+                        Seleccione una nota
+                      </option>
                       <option value="Aprobado">Aprobado</option>
                       <option value="No Aprobado">No Aprobado</option>
                     </select>
                   </div>
-
-                  <button className="btn" id="botones">
-                    Agregar Estudio
-                  </button>
+                  <div className="text-center">
+                    <button className="btn" id="botones">
+                      Agregar Estudio
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>

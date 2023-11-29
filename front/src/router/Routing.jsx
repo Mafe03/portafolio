@@ -10,6 +10,7 @@ import Estudios from "../components/private/Estudios";
 import Proyectos from "../components/private/Proyectos";
 import AgregarEstudios from "../components/private/AgregarEstudios";
 import AgregarProyectos from "../components/private/AgregarProyectos";
+import Cerrar from "../components/private/Cerrar";
 
 const Routing = () => {
   //Creacion del sistema de rutas
@@ -28,6 +29,7 @@ const Routing = () => {
             <Route path="AgregarEstudio" element={<AgregarEstudios />} />
             <Route path="Proyectos" element={<Proyectos />} />
             <Route path="AgregarProyectos" element={<AgregarProyectos />} />
+            <Route path="Cerrar" element={<Cerrar />} />
           </Route>
         </Routes>
       </AuthProvider>

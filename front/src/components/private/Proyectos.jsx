@@ -21,6 +21,26 @@ const Proyectos = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    listarProyectos();
+  }, []);
+
+  const listarProyectos = async (nextPage = 1) => {
+    const request = await fetch(Global.url + "/proyectos/listar/" + nextPage, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+
+    const data = await request.json();
+    setTotalp(data.totalPaginas);
+    if (data.status === "ok") {
+      setProyectos(data.proyectos);
+    }
+  };
+
   const NextPage = () => {
     if (page >= totalp) {
       MySwal.fire({
@@ -36,7 +56,7 @@ const Proyectos = () => {
   };
 
   const AntPage = () => {
-    if (page === 1) {
+    if (page == 1) {
       MySwal.fire({
         icon: "error",
         title: "Error",
@@ -48,10 +68,6 @@ const Proyectos = () => {
       listarProyectos(next);
     }
   };
-
-  useEffect(() => {
-    listarProyectos();
-  }, []);
 
   const eliminarProyecto = (id, nombre) => {
     MySwal.fire({
@@ -84,25 +100,6 @@ const Proyectos = () => {
         MySwal.fire("Se Cancelo la Eliminacion", "", "info");
       }
     });
-  };
-
-  const listarProyectos = async (nextpages = 1) => {
-    const obtenerProyectos = await fetch(
-      Global.url + `proyectos/listar/${nextpages}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `${token}`,
-        },
-      }
-    );
-    const proyectos2 = await obtenerProyectos.json();
-    setTotalp(proyectos2.totalPaginas);
-    if (proyectos2.perfiles.length === 0) {
-      setProyectos(null);
-    } else {
-      setProyectos(proyectos2.perfiles);
-    }
   };
 
   return (

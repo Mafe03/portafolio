@@ -11,9 +11,62 @@ const MySwal = withReactContent(Swal2);
 const Estudios = () => {
   const { Autenticado } = UseAuth();
   const token = localStorage.getItem("token");
+  const [estudios, setEstudios] = useState(null);
+  const [Editar, setEditar] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalp, setTotalp] = useState(null);
+
   useEffect(() => {
     listarEstudios();
   }, []);
+
+  const listarEstudios = async (nextPage = 1) => {
+    const request = await fetch(Global.url + "/estudios/listar/" + nextPage, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+
+    const data = await request.json();
+    setTotalp(data.totalPaginas);
+    if (data.status === "ok") {
+      setEstudios(data.estudios);
+    }
+  };
+
+  const NextPage = () => {
+    if (page >= totalp) {
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No hay mas información disponible",
+      });
+    } else {
+      let next = page + 1;
+      setPage(next);
+      listarEstudios(next);
+    }
+  };
+
+  const AntPage = () => {
+    if (page == 1) {
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ya te encuentras en la primer pagina",
+      });
+    } else {
+      let next = page - 1;
+      setPage(next);
+      listarEstudios(next);
+    }
+  };
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const eliminarEstudio = (id, nombre) => {
     MySwal.fire({
@@ -49,62 +102,6 @@ const Estudios = () => {
       }
     });
   };
-
-  const [estudios, setEstudios] = useState(null);
-  const [Editar, setEditar] = useState(0);
-  const [page, setPage] = useState(1);
-  const [totalp, setTotalp] = useState(null);
-
-  const listarEstudios = async (nextpages = 1) => {
-    const obtenerEstudios = await fetch(
-      Global.url + "estudios/listar/" + nextpages,
-      {
-        method: "GET", // Método de solicitud (puede ser GET, POST, etc.)
-        headers: {
-          Authorization: `${token}`, // Incluye el token JWT en el encabezado Authorization
-        },
-      }
-    );
-    const estudios2 = await obtenerEstudios.json();
-    setTotalp(estudios2.totalPaginas);
-    if (estudios2.perfiles.length == 0) {
-      setEstudios(null);
-    } else {
-      setEstudios(estudios2.perfiles);
-    }
-  };
-
-  const NextPage = () => {
-    if (page >= totalp) {
-      MySwal.fire({
-        icon: "error",
-        title: "Error",
-        text: "No hay mas información disponible",
-      });
-    } else {
-      let next = page + 1;
-      setPage(next);
-      listarEstudios(next);
-    }
-  };
-
-  const AntPage = () => {
-    if (page == 1) {
-      MySwal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Ya te encuentras en la primer pagina",
-      });
-    } else {
-      let next = page - 1;
-      setPage(next);
-      listarEstudios(next);
-    }
-  };
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   return (
     <>

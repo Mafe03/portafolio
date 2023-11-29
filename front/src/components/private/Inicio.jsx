@@ -35,7 +35,7 @@ const Inicio = () => {
                   <h5>Telefono: {datos.telefono}</h5>
                 </div>
                 <div className="col-5">
-                  <img src={user} alt="" style={{ width: 200 }} />
+                  <img src={user} alt="" style={{ width: "100%" }} />
                 </div>
               </div>
             </div>
